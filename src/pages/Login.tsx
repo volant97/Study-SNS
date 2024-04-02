@@ -36,6 +36,7 @@ function Login() {
     try {
       setIsLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
+      console.log(auth.currentUser);
       navigate("/");
     } catch (error) {
       if (error instanceof FirebaseError) {

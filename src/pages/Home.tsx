@@ -1,8 +1,9 @@
 /* eslint-disable no-restricted-globals */
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 
 function Home() {
+  const user = auth.currentUser;
   const navigate = useNavigate();
 
   const handleLogoutBtnClick = async () => {
@@ -13,6 +14,10 @@ function Home() {
       navigate("/login");
     }
   };
+
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <div>
