@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components";
+import GlobalStyle from "./GlobalStyle";
+import Router from "./shared/Router";
+import { useState } from "react";
+import LoadingScreen from "./components/common/LoadingScreen";
 
 function App() {
+  // auth 구현 후 로딩중 연결
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StContainer>
+      <GlobalStyle />
+      {isLoading ? <LoadingScreen /> : <Router />}
+    </StContainer>
   );
 }
 
 export default App;
+
+const StContainer = styled.div`
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+`;
