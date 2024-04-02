@@ -12,7 +12,17 @@ export const StContainer = styled.div`
     gap: 10px;
   }
 
-  p {
+  .error {
     color: red;
+  }
+`;
+
+export const StPageToggle = styled.div`
+  display: flex;
+  gap: 15px;
+
+  a {
+    color: #ffb819;
+    text-decoration-line: none;
   }
 `;

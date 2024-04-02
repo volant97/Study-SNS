@@ -27,6 +27,14 @@
 
 - Login 구현
 
+#### 1.3
+
+- SignUp 구현
+
 #### 업데이트 예정
 
-- SignUp
+- 소셜로그인(Github)
+- Login, SignUp Page CSS
+- 에러 메시지 예외 처리
+- Security Rules
+- APT Key Security

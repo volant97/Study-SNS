@@ -1,9 +1,9 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { FirebaseError } from "firebase/app";
-import { StContainer } from "../style/login";
+import { StContainer, StPageToggle } from "../style/login";
 
 function Login() {
   const navigate = useNavigate();
@@ -67,7 +67,11 @@ function Login() {
         />
         <button type="submit">{isLoading ? "로딩중..." : "로그인"}</button>
       </form>
-      <p>{error === "" ? null : error}</p>
+      <p className="error">{error === "" ? null : error}</p>
+      <StPageToggle>
+        <p>계정이 없으신가요?</p>
+        <Link to={"/signup"}>계정 생성</Link>
+      </StPageToggle>
     </StContainer>
   );
 }

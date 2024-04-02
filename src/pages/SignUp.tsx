@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import { StContainer } from "../style/login";
+import { Link, useNavigate } from "react-router-dom";
+import { StContainer, StPageToggle } from "../style/login";
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import { auth } from "../firebase";
 
@@ -11,9 +11,9 @@ function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [nickname, setNickname] = useState("");
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -24,6 +24,8 @@ function SignUp() {
       setEmail(value);
     } else if (name === "password") {
       setPassword(value);
+    } else if (name === "nickname") {
+      setNickname(value);
     }
   };
 
@@ -31,11 +33,16 @@ function SignUp() {
     e.preventDefault();
     setError("");
 
-    if (isLoading || email === "" || password === "") return;
+    if (isLoading || email === "" || password === "" || nickname === "") return;
 
     try {
       setIsLoading(true);
-      await signInWithEmailAndPassword(auth, email, password);
+      const credentials = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      await updateProfile(credentials.user, { displayName: nickname });
       navigate("/");
     } catch (error) {
       if (error instanceof FirebaseError) {
@@ -67,16 +74,20 @@ function SignUp() {
           required
         />
         <input
-          name="password"
-          value={password}
+          name="nickname"
+          value={nickname}
           onChange={handleOnChange}
           placeholder="닉네임"
-          type="password"
+          type="text"
           required
         />
         <button type="submit">{isLoading ? "로딩중..." : "회원가입"}</button>
       </form>
-      <p>{error === "" ? null : error}</p>
+      <p className="error">{error === "" ? null : error}</p>
+      <StPageToggle>
+        <p>계정이 이미 있으신가요?</p>
+        <Link to={"/login"}>로그인 하기</Link>
+      </StPageToggle>
     </StContainer>
   );
 }
