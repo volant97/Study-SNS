@@ -1,16 +1,17 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
-import { FirebaseError } from "firebase/app";
 import { StContainer } from "../style/login";
+import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { FirebaseError } from "firebase/app";
+import { auth } from "../firebase";
 
-function Login() {
+function SignUp() {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -53,7 +54,7 @@ function Login() {
           name="email"
           value={email}
           onChange={handleOnChange}
-          placeholder="아이디"
+          placeholder="아이디 (이메일)"
           type="email"
           required
         />
@@ -65,11 +66,19 @@ function Login() {
           type="password"
           required
         />
-        <button type="submit">{isLoading ? "로딩중..." : "로그인"}</button>
+        <input
+          name="password"
+          value={password}
+          onChange={handleOnChange}
+          placeholder="닉네임"
+          type="password"
+          required
+        />
+        <button type="submit">{isLoading ? "로딩중..." : "회원가입"}</button>
       </form>
       <p>{error === "" ? null : error}</p>
     </StContainer>
   );
 }
 
-export default Login;
+export default SignUp;

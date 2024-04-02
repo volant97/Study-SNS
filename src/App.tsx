@@ -1,12 +1,21 @@
 import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 import Router from "./shared/Router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoadingScreen from "./components/common/LoadingScreen";
+import { auth } from "./firebase";
 
 function App() {
-  // auth 구현 후 로딩중 연결
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const init = async () => {
+    await auth.authStateReady();
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
 
   return (
     <StContainer>
