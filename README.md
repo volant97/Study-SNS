@@ -25,15 +25,25 @@
 
 #### 1.2
 
-- Login 구현
+- Login
+  - 로그인
+  - 회원가입 Page Link
 
 #### 1.3
 
-- SignUp 구현
+- SignUp
+  - 회원가입
+  - 로그인 Page Link
+
+#### 1.4
+
+- Login
+  - 소셜로그인(Github)
+- Home
+  - 로그아웃 버튼
 
 #### 업데이트 예정
 
-- 소셜로그인(Github)
 - Login, SignUp Page CSS
 - 에러 메시지 예외 처리
 - Security Rules

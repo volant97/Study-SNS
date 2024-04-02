@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { FirebaseError } from "firebase/app";
 import { StContainer, StPageToggle } from "../style/login";
+import GithubBtn from "../components/login/GithubBtn";
 
 function Login() {
   const navigate = useNavigate();
@@ -68,6 +69,7 @@ function Login() {
         <button type="submit">{isLoading ? "로딩중..." : "로그인"}</button>
       </form>
       <p className="error">{error === "" ? null : error}</p>
+      <GithubBtn />
       <StPageToggle>
         <p>계정이 없으신가요?</p>
         <Link to={"/signup"}>계정 생성</Link>
